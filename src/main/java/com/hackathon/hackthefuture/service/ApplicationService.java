@@ -109,6 +109,9 @@ public class ApplicationService {
     public Application approveApplication(Long id) {
         Application application = applicationRepository.getOne(id);
         application.setStatus("APPROVED");
+        Client applicationClient  = application.getClient();
+        applicationClient.setLoaned(application.getAmountRequested());
+        clientRepository.save(applicationClient);
         return applicationRepository.save(application);
     }
 
