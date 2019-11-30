@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * Service Implementation for managing {@link Client}.
@@ -50,20 +48,6 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-
-
-    /**
-    *  Get all the clients where Application is {@code null}.
-     *  @return the list of entities.
-     */
-    @Transactional(readOnly = true) 
-    public List<Client> findAllWhereApplicationIsNull() {
-        log.debug("Request to get all clients where Application is null");
-        return StreamSupport
-            .stream(clientRepository.findAll().spliterator(), false)
-            .filter(client -> client.getApplication() == null)
-            .collect(Collectors.toList());
-    }
 
     /**
      * Get one client by id.

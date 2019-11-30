@@ -20,8 +20,7 @@
         {
             "relationshipName": "application",
             "otherEntityName": "application",
-            "relationshipType": "one-to-one",
-            "ownerSide": false,
+            "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "client"
         }
     ],

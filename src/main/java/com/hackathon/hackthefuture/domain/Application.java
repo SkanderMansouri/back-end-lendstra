@@ -1,4 +1,5 @@
 package com.hackathon.hackthefuture.domain;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -44,12 +45,12 @@ public class Application implements Serializable {
     @Column(name = "terms_in")
     private LocalDate termsIn;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Client client;
-
     @OneToMany(mappedBy = "application")
     private Set<Demand> demands = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties("applications")
+    private Client client;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -164,19 +165,6 @@ public class Application implements Serializable {
         this.termsIn = termsIn;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public Application client(Client client) {
-        this.client = client;
-        return this;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
     public Set<Demand> getDemands() {
         return demands;
     }
@@ -200,6 +188,19 @@ public class Application implements Serializable {
 
     public void setDemands(Set<Demand> demands) {
         this.demands = demands;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public Application client(Client client) {
+        this.client = client;
+        return this;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
