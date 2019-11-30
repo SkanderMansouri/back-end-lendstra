@@ -17,6 +17,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing {@link com.hackathon.hackthefuture.domain.Client}.
@@ -82,10 +83,15 @@ public class ClientResource {
      * {@code GET  /clients} : get all the clients.
      *
 
+     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of clients in body.
      */
     @GetMapping("/clients")
-    public List<Client> getAllClients() {
+    public List<Client> getAllClients(@RequestParam(required = false) String filter) {
+        if ("application-is-null".equals(filter)) {
+            log.debug("REST request to get all Clients where application is null");
+            return clientService.findAllWhereApplicationIsNull();
+        }
         log.debug("REST request to get all Clients");
         return clientService.findAll();
     }

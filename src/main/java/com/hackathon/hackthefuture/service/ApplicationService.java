@@ -101,4 +101,19 @@ public class ApplicationService {
         log.debug("Request to delete Application : {}", id);
         applicationRepository.deleteById(id);
     }
+
+    public List<Application> findAllByStatus(String status) {
+      return   applicationRepository.findAllByStatus(status);
+    }
+
+    public Application approveApplication(Long id) {
+        Application application = applicationRepository.getOne(id);
+        application.setStatus("APPROVED");
+        return applicationRepository.save(application);
+    }
+
+    public List<Application> getApplicationsOfClient(Long id) {
+        Client client = clientRepository.getOne(id);
+        return applicationRepository.findAllByClient(client);
+    }
 }

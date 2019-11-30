@@ -16,6 +16,13 @@
             "otherEntityName": "expense",
             "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "client"
+        },
+        {
+            "relationshipName": "application",
+            "otherEntityName": "application",
+            "relationshipType": "one-to-one",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "client"
         }
     ],
     "fields": [

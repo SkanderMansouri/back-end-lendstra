@@ -71,6 +71,13 @@ public class ApplicationResource {
         return ResponseEntity.ok().body(result);
     }
 
+    @PutMapping("/applications/{id}/approve")
+    public ResponseEntity<?> approveApplication(@PathVariable Long id) throws URISyntaxException {
+        log.debug("REST request to approve Application : {}", id);
+        applicationService.approveApplication(id);
+        return ResponseEntity.ok().body( applicationService.approveApplication(id));
+    }
+
     /**
      * {@code GET  /applications} : get all the applications.
      *
@@ -83,6 +90,18 @@ public class ApplicationResource {
         return applicationService.findAll();
     }
 
+
+    @GetMapping("/applications/{status}")
+    public List<Application> getAllApplicationsByStatus(@PathVariable String status) {
+        log.debug("REST request to get all Applications");
+        return applicationService.findAllByStatus(status);
+    }
+
+    @GetMapping("/applications/client/{id}")
+    public List<Application> getApplicationsOfClient(@PathVariable Long id) {
+        log.debug("REST request to get all Applications");
+        return applicationService.getApplicationsOfClient(id);
+    }
     /**
      * {@code GET  /applications/:id} : get the "id" application.
      *
