@@ -1,7 +1,12 @@
 package com.hackathon.hackthefuture.service;
 
 import com.hackathon.hackthefuture.domain.Application;
+import com.hackathon.hackthefuture.domain.Client;
+import com.hackathon.hackthefuture.domain.Demand;
 import com.hackathon.hackthefuture.repository.ApplicationRepository;
+import com.hackathon.hackthefuture.repository.ClientRepository;
+import com.hackathon.hackthefuture.repository.DemandRepository;
+import com.hackathon.hackthefuture.service.dto.ApplicationDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +26,14 @@ public class ApplicationService {
     private final Logger log = LoggerFactory.getLogger(ApplicationService.class);
 
     private final ApplicationRepository applicationRepository;
+    private final ClientRepository clientRepository;
+    private final DemandRepository demandRepository;
 
-    public ApplicationService(ApplicationRepository applicationRepository) {
+
+    public ApplicationService(ApplicationRepository applicationRepository, ClientRepository clientRepository, DemandRepository demandRepository) {
         this.applicationRepository = applicationRepository;
+        this.clientRepository = clientRepository;
+        this.demandRepository = demandRepository;
     }
 
     /**
@@ -32,9 +42,30 @@ public class ApplicationService {
      * @param application the entity to save.
      * @return the persisted entity.
      */
-    public Application save(Application application) {
+    @Transactional
+    public Application save(ApplicationDTO application) {
         log.debug("Request to save Application : {}", application);
-        return applicationRepository.save(application);
+
+        Application newApplication  = new Application();
+        newApplication.setAmountRequested(application.getAmountRequested());
+        newApplication.setDate(application.getDate());
+        newApplication.setMarketDescription(application.getMarketDescription());
+        newApplication.setProjectDescription(application.getProjectDescription());
+        newApplication.setPurpose(application.getPurpose());
+        newApplication.setStatus("PENDING");
+        newApplication.setTermsIn(application.getTermsIn());
+
+        Client client = clientRepository.getOne(application.getClientId());
+        newApplication.setClient(client);
+        Application savedApp = applicationRepository.save(newApplication);
+        application.getDemands().forEach(demand -> {
+            Demand newDemand = new Demand();
+            newDemand.setName(demand.getName());
+            newDemand.setValue(demand.getValue());
+            demandRepository.save(newDemand);
+        });
+
+        return savedApp;
     }
 
     /**

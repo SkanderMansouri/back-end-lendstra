@@ -2,6 +2,7 @@ package com.hackathon.hackthefuture.web.rest;
 
 import com.hackathon.hackthefuture.domain.Application;
 import com.hackathon.hackthefuture.service.ApplicationService;
+import com.hackathon.hackthefuture.service.dto.ApplicationDTO;
 import com.hackathon.hackthefuture.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -46,11 +47,8 @@ public class ApplicationResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/applications")
-    public ResponseEntity<Application> createApplication(@RequestBody Application application) throws URISyntaxException {
+    public ResponseEntity<Application> createApplication(@RequestBody ApplicationDTO application) throws URISyntaxException {
         log.debug("REST request to save Application : {}", application);
-        if (application.getId() != null) {
-            throw new BadRequestAlertException("A new application cannot already have an ID", ENTITY_NAME, "idexists");
-        }
         Application result = applicationService.save(application);
         return ResponseEntity.created(new URI("/api/applications/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
@@ -67,15 +65,10 @@ public class ApplicationResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/applications")
-    public ResponseEntity<Application> updateApplication(@RequestBody Application application) throws URISyntaxException {
+    public ResponseEntity<Application> updateApplication(@RequestBody ApplicationDTO application) throws URISyntaxException {
         log.debug("REST request to update Application : {}", application);
-        if (application.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
         Application result = applicationService.save(application);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, application.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().body(result);
     }
 
     /**

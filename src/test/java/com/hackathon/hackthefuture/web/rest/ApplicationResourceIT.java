@@ -238,7 +238,6 @@ public class ApplicationResourceIT {
     @Transactional
     public void updateApplication() throws Exception {
         // Initialize the database
-        applicationService.save(application);
 
         int databaseSizeBeforeUpdate = applicationRepository.findAll().size();
 
@@ -297,7 +296,6 @@ public class ApplicationResourceIT {
     @Transactional
     public void deleteApplication() throws Exception {
         // Initialize the database
-        applicationService.save(application);
 
         int databaseSizeBeforeDelete = applicationRepository.findAll().size();
 

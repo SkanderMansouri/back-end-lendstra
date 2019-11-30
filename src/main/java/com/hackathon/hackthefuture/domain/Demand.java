@@ -25,6 +25,7 @@ public class Demand implements Serializable {
     private Double value;
 
     @ManyToOne
+    @JsonIgnoreProperties("demands")
     private Application application;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
