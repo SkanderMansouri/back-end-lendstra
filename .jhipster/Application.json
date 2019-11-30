@@ -1,0 +1,63 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "client",
+            "otherEntityName": "client",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "useJPADerivedIdentifier": false,
+            "otherEntityRelationshipName": "application"
+        },
+        {
+            "relationshipName": "demands",
+            "otherEntityName": "demand",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "application"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "purpose",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "amountRequested",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "marketDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "repayDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "termsIn",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20191130165807",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "serviceClass",
+    "entityTableName": "application",
+    "databaseType": "sql",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

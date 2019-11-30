@@ -1,0 +1,31 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "branch",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "accountNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "accountType",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20191130125136",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "bank",
+    "databaseType": "sql",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

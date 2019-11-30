@@ -1,0 +1,63 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "bank",
+            "otherEntityName": "bank",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "useJPADerivedIdentifier": false,
+            "otherEntityRelationshipName": "client"
+        },
+        {
+            "relationshipName": "expenses",
+            "otherEntityName": "expense",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "client"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "job",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "loaned",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "paid",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "valided",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20191130133236",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "serviceClass",
+    "entityTableName": "client",
+    "databaseType": "sql",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}
