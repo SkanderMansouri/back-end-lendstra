@@ -1,0 +1,37 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.hackathon.hackthefuture"
+    },
+    "jhipsterVersion": "6.5.1",
+    "applicationType": "monolith",
+    "baseName": "hack",
+    "packageName": "com.hackathon.hackthefuture",
+    "packageFolder": "com/hackathon/hackthefuture",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MjA4MGRhZTk1ZDRhMmY3YmQ0ZmViMWUxMGQwN2I1ODZlNzAzNmMzOTAyNTE2ZWY0OWM3NmU3MjQ3MjBkZDgxZDhiYmRlYTk3MTIyYTcyNTY5YmUyYTY2YjI4ZDBmYTBmM2M3NGE3OWQ1ZGQ5ZjY5NzAwMzlhOGQzOTg2MDhiMDY=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "skipClient": true,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
