@@ -1,7 +1,10 @@
 package com.hackathon.hackthefuture.service;
 
+import com.hackathon.hackthefuture.domain.Client;
 import com.hackathon.hackthefuture.domain.Expense;
+import com.hackathon.hackthefuture.repository.ClientRepository;
 import com.hackathon.hackthefuture.repository.ExpenseRepository;
+import com.hackathon.hackthefuture.service.dto.ExpenseDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +24,13 @@ public class ExpenseService {
     private final Logger log = LoggerFactory.getLogger(ExpenseService.class);
 
     private final ExpenseRepository expenseRepository;
+    private final ClientRepository clientRepository;
 
-    public ExpenseService(ExpenseRepository expenseRepository) {
+
+
+    public ExpenseService(ExpenseRepository expenseRepository, ClientRepository clientRepository) {
         this.expenseRepository = expenseRepository;
+        this.clientRepository = clientRepository;
     }
 
     /**
@@ -32,9 +39,18 @@ public class ExpenseService {
      * @param expense the entity to save.
      * @return the persisted entity.
      */
-    public Expense save(Expense expense) {
+    @Transactional
+    public Expense save(ExpenseDTO expense) {
         log.debug("Request to save Expense : {}", expense);
-        return expenseRepository.save(expense);
+        Client client = clientRepository.getOne(expense.getClientId());
+        client.setValided(client.getValided() + expense.getValue());
+        clientRepository.save(client);
+        Expense newExpense = new Expense();
+        newExpense.setClient(client);
+        newExpense.setName(expense.getName());
+        newExpense.setValue(expense.getValue());
+        newExpense.setProof(expense.getProof());
+        return expenseRepository.save(newExpense);
     }
 
     /**

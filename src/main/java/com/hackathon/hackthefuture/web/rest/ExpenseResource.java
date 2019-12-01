@@ -2,6 +2,7 @@ package com.hackathon.hackthefuture.web.rest;
 
 import com.hackathon.hackthefuture.domain.Expense;
 import com.hackathon.hackthefuture.service.ExpenseService;
+import com.hackathon.hackthefuture.service.dto.ExpenseDTO;
 import com.hackathon.hackthefuture.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -46,11 +47,8 @@ public class ExpenseResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/expenses")
-    public ResponseEntity<Expense> createExpense(@RequestBody Expense expense) throws URISyntaxException {
+    public ResponseEntity<Expense> createExpense(@RequestBody ExpenseDTO expense) throws URISyntaxException {
         log.debug("REST request to save Expense : {}", expense);
-        if (expense.getId() != null) {
-            throw new BadRequestAlertException("A new expense cannot already have an ID", ENTITY_NAME, "idexists");
-        }
         Expense result = expenseService.save(expense);
         return ResponseEntity.created(new URI("/api/expenses/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
@@ -67,15 +65,10 @@ public class ExpenseResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/expenses")
-    public ResponseEntity<Expense> updateExpense(@RequestBody Expense expense) throws URISyntaxException {
+    public ResponseEntity<Expense> updateExpense(@RequestBody ExpenseDTO expense) throws URISyntaxException {
         log.debug("REST request to update Expense : {}", expense);
-        if (expense.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
         Expense result = expenseService.save(expense);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, expense.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().body(result);
     }
 
     /**
